@@ -1,0 +1,58 @@
+# Vitral
+
+A deep-blue Spicetify theme for Spotify desktop. The album art lights the window from behind glass, and the home page is rebuilt around a large greeting and search bar.
+
+*[Versión en español más abajo](#español)*
+
+## Features
+
+- **Home page:** greeting in your language, the current cover fading into the background, and a search bar that glides to the top bar as you scroll
+- **Recents mosaic and playlist columns** instead of side-scrolling rows; promotional shelves are hidden
+- **Large fading photo** on playlist, album and artist pages
+- **Floating pill player** that grows with extra buttons, with a volume slider that opens on hover
+- **Slim library rail** that opens on hover without moving the page
+- **Play button eyes** that follow your cursor and blink while music plays
+- Works in any Spotify language, with fallback fonts for non-Latin scripts
+
+## Requirements
+
+- [Spicetify](https://spicetify.app) 2.x with `inject_theme_js` enabled (the default)
+- Developed and tested on Windows with Spotify 1.3.6 and Spicetify 2.46
+
+## Install
+
+Copy this folder to `%APPDATA%\spicetify\Themes\Vitral` on Windows, or `~/.config/spicetify/Themes/Vitral` on macOS and Linux. Then run:
+
+```bash
+spicetify config current_theme Vitral color_scheme vitral inject_css 1 replace_colors 1 inject_theme_js 1
+spicetify apply
+```
+
+## Known limits
+
+- The theme uses some of Spotify's internal class names, so a Spotify update can break parts of it. The home search bar and the library rail are the most exposed.
+- Hover tooltips on the player buttons appear after a short pause on purpose, to keep the app responsive.
+- Tested in Spanish, English and Japanese. Right-to-left languages have not been tested.
+
+## Uninstall
+
+```bash
+spicetify config current_theme marketplace color_scheme " "
+spicetify apply
+```
+
+## License
+
+MIT. See [LICENSE](LICENSE).
+
+---
+
+## Español
+
+Tema de Spicetify en azul profundo para Spotify de escritorio. La carátula ilumina la ventana desde detrás del vidrio, y el inicio se rehace alrededor de un saludo grande y el buscador.
+
+**Incluye:** inicio con saludo en tu idioma, mosaico de recientes, foto grande que se desvanece en playlists, álbumes y artistas, reproductor en píldora flotante, lista lateral compacta y ojos en el botón de play que siguen al cursor.
+
+**Instalación:** copia esta carpeta en `%APPDATA%\spicetify\Themes\Vitral` (Windows) o `~/.config/spicetify/Themes/Vitral` (macOS y Linux), y ejecuta los comandos de arriba.
+
+**Límites:** usa nombres internos de Spotify, así que una actualización puede romper partes del tema. Probado en Windows, en español, inglés y japonés; los idiomas de derecha a izquierda no están probados.

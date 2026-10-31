@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Vitral",
+    "description": "Deep-blue theme where album art lights the window from behind glass, with a rebuilt home page and a floating pill player.",
+    "preview": "preview.png",
+    "readme": "README.md",
+    "usercss": "user.css",
+    "schemes": "color.ini",
+    "include": ["https://raw.githubusercontent.com/hgames1262007-hub/vitral/main/theme.js"],
+    "authors": [{ "name": "SrPictus", "url": "https://github.com/hgames1262007-hub" }],
+    "tags": ["blue", "dark", "glass", "animated"]
+  }
+]
