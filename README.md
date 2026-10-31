@@ -6,14 +6,14 @@ A deep-blue Spicetify theme for Spotify desktop. The album art lights the window
 
 ## Screenshots
 
-![Artist page](https://raw.githubusercontent.com/hgames1262007-hub/vitral/main/screenshots/featured.png)
-![Home page](https://raw.githubusercontent.com/hgames1262007-hub/vitral/main/screenshots/home.png)
-![Playlist page](https://raw.githubusercontent.com/hgames1262007-hub/vitral/main/screenshots/playlist.png)
-![Artist page](https://raw.githubusercontent.com/hgames1262007-hub/vitral/main/screenshots/artist.png)
+![Artist page](https://raw.githubusercontent.com/SrPictus/vitral/main/screenshots/featured.png)
+![Home page](https://raw.githubusercontent.com/SrPictus/vitral/main/screenshots/home.png)
+![Playlist page](https://raw.githubusercontent.com/SrPictus/vitral/main/screenshots/playlist.png)
+![Artist page](https://raw.githubusercontent.com/SrPictus/vitral/main/screenshots/artist.png)
 
 The play button watches your cursor:
 
-![Play button with eyes](https://raw.githubusercontent.com/hgames1262007-hub/vitral/main/screenshots/monito.png)
+![Play button with eyes](https://raw.githubusercontent.com/SrPictus/vitral/main/screenshots/monito.png)
 
 ## Features
 

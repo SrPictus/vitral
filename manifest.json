@@ -6,8 +6,8 @@
     "readme": "README.md",
     "usercss": "user.css",
     "schemes": "color.ini",
-    "include": ["https://raw.githubusercontent.com/hgames1262007-hub/vitral/main/theme.js"],
-    "authors": [{ "name": "SrPictus", "url": "https://github.com/hgames1262007-hub" }],
+    "include": ["https://raw.githubusercontent.com/SrPictus/vitral/main/theme.js"],
+    "authors": [{ "name": "SrPictus", "url": "https://github.com/SrPictus" }],
     "tags": ["blue", "dark", "glass", "animated"]
   }
 ]
