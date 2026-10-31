@@ -4,6 +4,17 @@ A deep-blue Spicetify theme for Spotify desktop. The album art lights the window
 
 *[Versión en español más abajo](#español)*
 
+## Screenshots
+
+![Artist page](screenshots/featured.png)
+![Home page](screenshots/home.png)
+![Playlist page](screenshots/playlist.png)
+![Artist page](screenshots/artist.png)
+
+The play button watches your cursor:
+
+![Play button with eyes](screenshots/monito.png)
+
 ## Features
 
 - **Home page:** greeting in your language, the current cover fading into the background, and a search bar that glides to the top bar as you scroll
@@ -13,6 +24,13 @@ A deep-blue Spicetify theme for Spotify desktop. The album art lights the window
 - **Slim library rail** that opens on hover without moving the page
 - **Play button eyes** that follow your cursor and blink while music plays
 - Works in any Spotify language, with fallback fonts for non-Latin scripts
+
+## Compatible extensions
+
+Developed and tested alongside these two extensions:
+
+- **[Spicy Lyrics](https://github.com/Spikerko/spicy-lyrics)** by Spikerko
+- **No Controls** by ohitstom (if you bring the window buttons back with F8, they overlap the profile picture)
 
 ## Requirements
 
@@ -52,6 +70,8 @@ MIT. See [LICENSE](LICENSE).
 Tema de Spicetify en azul profundo para Spotify de escritorio. La carátula ilumina la ventana desde detrás del vidrio, y el inicio se rehace alrededor de un saludo grande y el buscador.
 
 **Incluye:** inicio con saludo en tu idioma, mosaico de recientes, foto grande que se desvanece en playlists, álbumes y artistas, reproductor en píldora flotante, lista lateral compacta y ojos en el botón de play que siguen al cursor.
+
+**Compatible con:** Spicy Lyrics y No Controls. Si recuperas los botones de ventana con F8 en No Controls, se montan sobre la foto de perfil.
 
 **Instalación:** copia esta carpeta en `%APPDATA%\spicetify\Themes\Vitral` (Windows) o `~/.config/spicetify/Themes/Vitral` (macOS y Linux), y ejecuta los comandos de arriba.
 

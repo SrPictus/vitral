@@ -1057,3 +1057,15 @@ h2 {
     transition: none;
   }
 }
+
+/* Editor de transiciones: panel sólido, por encima de la lista lateral y debajo de la píldora */
+.WDGCR4wjBcw7jSoDr1ei:has(> #expanded-panel-portal > *) {
+  z-index: 35 !important;
+}
+
+#expanded-panel-portal > * {
+  --background-base: #0b1020 !important;
+  background: #0b1020 !important;
+  border-radius: var(--vt-panel-radius);
+  box-shadow: var(--vt-edge);
+}
