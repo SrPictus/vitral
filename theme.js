@@ -400,7 +400,9 @@
 
   async function syncHome() {
     const token = ++homeToken;
-    if (!isHomeRoute()) {
+    // Las letras de Spotify ocultan la página sin cambiar de ruta: el buscador del inicio se va con ella
+    const mainWidth = document.querySelector("#main-view")?.getBoundingClientRect().width ?? 1;
+    if (!isHomeRoute() || !mainWidth) {
       if (root.classList.contains("vt-home-search")) flySearch(() => root.classList.remove("vt-home-search"));
       homeHero.remove();
       return;
@@ -597,6 +599,31 @@
       if (homeHero.isConnected) homeGreeting.textContent = greetingText();
     }).catch(() => {});
     syncRoute();
+
+    const mainView = document.querySelector("#main-view");
+    if (mainView) {
+      let mainShown = mainView.getBoundingClientRect().width > 0;
+      // La página vuelve deslizándose: el buscador se coloca cuando ya está quieta
+      const whenSettled = (done) => {
+        let last = null, still = 0, frames = 0;
+        const step = () => {
+          if (!mainShown) return;
+          const left = mainView.getBoundingClientRect().left;
+          still = left === last ? still + 1 : 0;
+          last = left;
+          if (still >= 5 || ++frames > 120) done();
+          else requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      };
+      new ResizeObserver(([entry]) => {
+        const shown = entry.contentRect.width > 0;
+        if (shown === mainShown) return;
+        mainShown = shown;
+        if (shown) whenSettled(syncHome);
+        else syncHome();
+      }).observe(mainView);
+    }
 
     // Cambio de página: entra rápido y nunca retrasa la carga
     Spicetify.Platform.History.listen(() => {
