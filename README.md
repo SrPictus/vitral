@@ -4,6 +4,17 @@ A Spicetify theme for Spotify desktop in eight colors: Dark Blue, Pink, Purple, 
 
 *[Versión en español más abajo](#español)*
 
+## Colors
+
+Pick one in the dropdown at the top of the Marketplace.
+
+| | |
+|:---:|:---:|
+| **Dark Blue**<br>![Dark Blue palette](https://raw.githubusercontent.com/SrPictus/vitral/main/screenshots/colors/dark-blue.png) | **Pink**<br>![Pink palette](https://raw.githubusercontent.com/SrPictus/vitral/main/screenshots/colors/pink.png) |
+| **Purple**<br>![Purple palette](https://raw.githubusercontent.com/SrPictus/vitral/main/screenshots/colors/purple.png) | **Red**<br>![Red palette](https://raw.githubusercontent.com/SrPictus/vitral/main/screenshots/colors/red.png) |
+| **Cyan**<br>![Cyan palette](https://raw.githubusercontent.com/SrPictus/vitral/main/screenshots/colors/cyan.png) | **Lime**<br>![Lime palette](https://raw.githubusercontent.com/SrPictus/vitral/main/screenshots/colors/lime.png) |
+| **Black**<br>![Black palette](https://raw.githubusercontent.com/SrPictus/vitral/main/screenshots/colors/black.png) | **White**<br>![White palette](https://raw.githubusercontent.com/SrPictus/vitral/main/screenshots/colors/white.png) |
+
 ## Screenshots
 
 ![Artist page](https://raw.githubusercontent.com/SrPictus/vitral/main/screenshots/featured.png)

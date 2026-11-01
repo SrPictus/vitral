@@ -640,6 +640,12 @@
       }).observe(mainView);
     }
 
+    // Spotify puede redibujar el inicio sin cambiar de ruta: si se lleva el saludo, se reconstruye
+    // para que el buscador no se quede flotando sobre las listas
+    setInterval(() => {
+      if (!document.hidden && root.classList.contains("vt-home-search") && !homeHero.isConnected) syncHome();
+    }, 2000);
+
     // Cambio de página: entra rápido y nunca retrasa la carga
     Spicetify.Platform.History.listen(() => {
       syncRoute();
