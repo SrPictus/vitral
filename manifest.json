@@ -1,13 +1,13 @@
 [
   {
     "name": "Vitral",
-    "description": "Theme in five colors (Dark Blue, Pink, Green, Purple, Amber) where album art lights the window from behind glass, with a rebuilt home page and a floating pill player. Works on its own, with optional integrations for Spicy Lyrics, Mix Lyrics and No Controls.",
+    "description": "Theme in eight colors (Dark Blue, Pink, Purple, Red, Cyan, Lime, Black, White) where album art lights the window from behind glass, with a rebuilt home page and a floating pill player. Works on its own, with optional integrations for Spicy Lyrics, Mix Lyrics and No Controls.",
     "preview": "preview.png",
     "readme": "README.md",
     "usercss": "user.css",
     "schemes": "color.ini",
     "include": ["https://raw.githubusercontent.com/SrPictus/vitral/main/theme.js"],
     "authors": [{ "name": "SrPictus", "url": "https://github.com/SrPictus" }],
-    "tags": ["blue", "pink", "green", "purple", "dark", "glass", "animated"]
+    "tags": ["blue", "pink", "purple", "red", "cyan", "lime", "black", "white", "glass", "animated"]
   }
 ]

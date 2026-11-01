@@ -1091,6 +1091,23 @@ body #SpicyLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line.Active
   text-shadow: 0 0 var(--text-shadow-blur-radius) rgba(var(--vt-accent-rgb), var(--text-shadow-opacity)) !important;
 }
 
+/* Spicy Lyrics pinta la letra en blanco fijo: con el color de texto de la paleta también se lee en la clara */
+body #SpicyLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line .word,
+body #SpicyLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line .letter {
+  background-image: linear-gradient(90deg, rgba(var(--spice-rgb-text, 255, 255, 255), 0.85) var(--gradient-position), rgba(var(--spice-rgb-text, 255, 255, 255), 0.5) calc(var(--gradient-position) + 20%)) !important;
+}
+
+body #SpicyLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line.NotSung .word,
+body #SpicyLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line.Sung .word {
+  text-shadow: 0 0 var(--BlurAmount, 0) rgba(var(--spice-rgb-text, 255, 255, 255), 0.35) !important;
+}
+
+/* Los textos sobre fotos y videos son blancos fijos en Spotify: siguen a la paleta */
+body .encore-over-media-set {
+  --text-base: var(--spice-text) !important;
+  --text-subdued: var(--spice-subtext) !important;
+}
+
 /* Las letras van sobre el fondo del tema, no sobre los colores de Spicy Lyrics y Mix Lyrics */
 #SpicyLyricsPage .CanvasAmbient,
 .spicy-dynamic-bg,
