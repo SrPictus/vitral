@@ -176,8 +176,9 @@
 
     ctx.globalCompositeOperation = "color";
     const tint = ctx.createLinearGradient(0, 0, 96, 96);
-    tint.addColorStop(0, "#1e2a4a");
-    tint.addColorStop(1, "#3b6fd4");
+    const palette = getComputedStyle(root);
+    tint.addColorStop(0, palette.getPropertyValue("--vt-surface").trim() || "#1e2a4a");
+    tint.addColorStop(1, palette.getPropertyValue("--vt-primary").trim() || "#3b6fd4");
     ctx.fillStyle = tint;
     ctx.fillRect(0, 0, 96, 96);
   }
@@ -207,6 +208,16 @@
     next.classList.add("is-visible");
     layers[front].classList.remove("is-visible");
     front = 1 - front;
+  }
+
+  // Al elegir otra paleta en Marketplace, la luz de fondo se vuelve a teñir con sus colores
+  const scheme = document.querySelector("style.marketplaceScheme");
+  if (scheme) {
+    new MutationObserver(() => {
+      const url = current;
+      current = null;
+      showCover(url);
+    }).observe(scheme, { childList: true, characterData: true, subtree: true });
   }
 
   function imageUrl(image) {

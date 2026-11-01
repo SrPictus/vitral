@@ -1,6 +1,6 @@
 # Vitral
 
-A deep-blue Spicetify theme for Spotify desktop. The album art lights the window from behind glass, and the home page is rebuilt around a large greeting and search bar.
+A Spicetify theme for Spotify desktop in five colors: Dark Blue, Pink, Green, Purple and Amber. The album art lights the window from behind glass, and the home page is rebuilt around a large greeting and search bar.
 
 *[Versión en español más abajo](#español)*
 
@@ -17,6 +17,7 @@ The play button watches your cursor:
 
 ## Features
 
+- **Five color palettes** in one theme: pick yours in the dropdown at the top of the Marketplace
 - **Home page:** greeting in your language, the current cover fading into the background, and a search bar that glides to the top bar as you scroll
 - **Recents mosaic and playlist columns** instead of side-scrolling rows; promotional shelves are hidden
 - **Large fading photo** on playlist, album and artist pages
@@ -43,7 +44,7 @@ Vitral works on its own and needs no extensions. If you use any of these, it ada
 Copy this folder to `%APPDATA%\spicetify\Themes\Vitral` on Windows, or `~/.config/spicetify/Themes/Vitral` on macOS and Linux. Then run:
 
 ```bash
-spicetify config current_theme Vitral color_scheme vitral inject_css 1 replace_colors 1 inject_theme_js 1
+spicetify config current_theme Vitral color_scheme "Dark Blue" inject_css 1 replace_colors 1 inject_theme_js 1
 spicetify apply
 ```
 
@@ -68,7 +69,7 @@ MIT. See [LICENSE](LICENSE).
 
 ## Español
 
-Tema de Spicetify en azul profundo para Spotify de escritorio. La carátula ilumina la ventana desde detrás del vidrio, y el inicio se rehace alrededor de un saludo grande y el buscador.
+Tema de Spicetify para Spotify de escritorio en cinco colores: Dark Blue, Pink, Green, Purple y Amber; se elige en el desplegable de Marketplace. La carátula ilumina la ventana desde detrás del vidrio, y el inicio se rehace alrededor de un saludo grande y el buscador.
 
 **Incluye:** inicio con saludo en tu idioma, mosaico de recientes, foto grande que se desvanece en playlists, álbumes y artistas, reproductor en píldora flotante, lista lateral compacta y ojos en el botón de play que siguen al cursor.
 

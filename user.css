@@ -1,17 +1,23 @@
 /* Vitral: la identidad de SrPictus sobre Spotify */
 :root {
-  --vt-bg: #070b16;
-  --vt-ink: #070b16;
-  --vt-surface: #1e2a4a;
-  --vt-blue: #3b6fd4;
-  --vt-accent: #93c5fd;
-  --vt-accent-rgb: 147, 197, 253;
-  --vt-lit: #e6f0ff;
-  --vt-glass: rgba(11, 16, 32, 0.62);
-  --vt-glass-raised: rgba(147, 197, 253, 0.07);
-  --vt-glass-hover: rgba(147, 197, 253, 0.14);
-  --vt-edge: inset 0 0 0 1px rgba(147, 197, 253, 0.1);
-  --vt-glow: 0 0 22px rgba(147, 197, 253, 0.85), 0 0 56px rgba(59, 111, 212, 0.6);
+  /* Los colores salen de la paleta elegida en color.ini; sin ella, el azul original */
+  --vt-bg: var(--spice-vt-bg, #070b16);
+  --vt-bg-rgb: var(--spice-rgb-vt-bg, 7, 11, 22);
+  --vt-ink: var(--vt-bg);
+  --vt-main: var(--spice-vt-main, #0b1020);
+  --vt-main-rgb: var(--spice-rgb-vt-main, 11, 16, 32);
+  --vt-raised: var(--spice-vt-raised, #0f1629);
+  --vt-surface: var(--spice-vt-surface, #1e2a4a);
+  --vt-primary: var(--spice-vt-primary, #3b6fd4);
+  --vt-primary-rgb: var(--spice-rgb-vt-primary, 59, 111, 212);
+  --vt-accent: var(--spice-vt-accent, #93c5fd);
+  --vt-accent-rgb: var(--spice-rgb-vt-accent, 147, 197, 253);
+  --vt-lit: var(--spice-vt-lit, #e6f0ff);
+  --vt-glass: rgba(var(--vt-main-rgb), 0.62);
+  --vt-glass-raised: rgba(var(--vt-accent-rgb), 0.07);
+  --vt-glass-hover: rgba(var(--vt-accent-rgb), 0.14);
+  --vt-edge: inset 0 0 0 1px rgba(var(--vt-accent-rgb), 0.1);
+  --vt-glow: 0 0 22px rgba(var(--vt-accent-rgb), 0.85), 0 0 56px rgba(var(--vt-primary-rgb), 0.6);
   --vt-ease: cubic-bezier(0.22, 1, 0.36, 1);
   --vt-panel-radius: 18px;
   --vt-tile-radius: 10px;
@@ -76,7 +82,7 @@ html {
 .vt-aurora-a {
   top: -20.5vmax;
   left: 2.5vmax;
-  background: radial-gradient(closest-side, rgba(59, 111, 212, 0.22), transparent);
+  background: radial-gradient(closest-side, rgba(var(--vt-primary-rgb), 0.22), transparent);
 }
 
 /* La luz solo fluye mientras suena la música */
@@ -100,9 +106,9 @@ html {
 #context-menu [role="menu"],
 [data-tippy-root] [role="menu"],
 .main-contextMenu-menu {
-  background-color: #0f1629 !important;
+  background-color: var(--vt-raised) !important;
   border-radius: 12px;
-  box-shadow: inset 0 0 0 1px rgba(147, 197, 253, 0.14), 0 18px 44px -12px rgba(0, 0, 0, 0.85);
+  box-shadow: inset 0 0 0 1px rgba(var(--vt-accent-rgb), 0.14), 0 18px 44px -12px rgba(0, 0, 0, 0.85);
 }
 
 /* Solo dentro de la ventana: menús y ventanas emergentes viven fuera y necesitan su fondo */
@@ -167,7 +173,7 @@ body,
   width: var(--vt-rail);
   overflow: hidden;
   border-radius: var(--vt-panel-radius);
-  background: rgba(11, 16, 32, 0.97);
+  background: rgba(var(--vt-main-rgb), 0.97);
   box-shadow: var(--vt-edge);
   contain: layout paint;
   /* Espera un instante para no abrirse al cruzarla sin querer */
@@ -282,8 +288,8 @@ html:not(.no-focus-outline) #Desktop_LeftSidebar_Id > nav:focus-within .xyKGFDsv
 
 #global-nav-bar input {
   border-radius: 999px !important;
-  background: rgba(11, 16, 32, 0.55) !important;
-  box-shadow: inset 0 0 0 1px rgba(147, 197, 253, 0.28) !important;
+  background: rgba(var(--vt-main-rgb), 0.55) !important;
+  box-shadow: inset 0 0 0 1px rgba(var(--vt-accent-rgb), 0.28) !important;
   color: var(--vt-lit) !important;
   transition: box-shadow 0.2s ease, background-color 0.2s ease;
 }
@@ -294,12 +300,12 @@ html:not(.no-focus-outline) #Desktop_LeftSidebar_Id > nav:focus-within .xyKGFDsv
 }
 
 #global-nav-bar input:hover {
-  box-shadow: inset 0 0 0 1px rgba(147, 197, 253, 0.55) !important;
+  box-shadow: inset 0 0 0 1px rgba(var(--vt-accent-rgb), 0.55) !important;
 }
 
 #global-nav-bar input:focus {
-  background: rgba(11, 16, 32, 0.92) !important;
-  box-shadow: inset 0 0 0 1px var(--vt-lit), 0 0 22px rgba(147, 197, 253, 0.45), 0 0 56px rgba(59, 111, 212, 0.4) !important;
+  background: rgba(var(--vt-main-rgb), 0.92) !important;
+  box-shadow: inset 0 0 0 1px var(--vt-lit), 0 0 22px rgba(var(--vt-accent-rgb), 0.45), 0 0 56px rgba(var(--vt-primary-rgb), 0.4) !important;
 }
 
 #global-nav-bar form[role="search"]::after {
@@ -309,7 +315,7 @@ html:not(.no-focus-outline) #Desktop_LeftSidebar_Id > nav:focus-within .xyKGFDsv
   right: 66px;
   transform: translateY(-50%);
   font-size: 12px;
-  color: rgba(147, 197, 253, 0.65);
+  color: rgba(var(--vt-accent-rgb), 0.65);
   pointer-events: none;
 }
 
@@ -319,7 +325,7 @@ html:not(.no-focus-outline) #Desktop_LeftSidebar_Id > nav:focus-within .xyKGFDsv
 
 #search-dropdown,
 #search-dropdown > * {
-  background: #0b1020 !important;
+  background: var(--vt-main) !important;
   border-radius: var(--vt-panel-radius) !important;
 }
 
@@ -361,7 +367,7 @@ h2 {
 
 /* Lo que queda fijo arriba al hacer scroll sí necesita fondo: si no, las filas se ven a través */
 #main-view .main-topBar-background.main-topBar-background {
-  background: rgba(11, 16, 32, 0.97) !important;
+  background: rgba(var(--vt-main-rgb), 0.97) !important;
   /* Sin borde duro sobre la foto mientras aparece */
   -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
 }
@@ -371,7 +377,7 @@ h2 {
 }
 
 #main-view .vt-stuck.vt-stuck {
-  background: rgba(11, 16, 32, 0.97) !important;
+  background: rgba(var(--vt-main-rgb), 0.97) !important;
 }
 
 #main-view [data-testid="overscroll-background"] {
@@ -411,7 +417,7 @@ h2 {
 
 .vt-has-hero #main-view .main-entityHeader-title h1,
 #main-view [data-testid="adaptiveEntityTitle"] span {
-  text-shadow: 0 2px 14px rgba(7, 11, 22, 0.75), var(--vt-glow) !important;
+  text-shadow: 0 2px 14px rgba(var(--vt-bg-rgb), 0.75), var(--vt-glow) !important;
 }
 
 /* La altura la marca la foto: así el desvanecido termina entero y no queda ningún corte */
@@ -467,7 +473,7 @@ h2 {
   white-space: nowrap;
   font: 400 clamp(160px, 22vw, 340px) / 1 "Anton", "SpotifyMixUITitle", sans-serif;
   text-transform: uppercase;
-  color: rgba(147, 197, 253, 0.06);
+  color: rgba(var(--vt-accent-rgb), 0.06);
 }
 
 /* Destellos en cruz del portafolio */
@@ -656,7 +662,7 @@ h2 {
   letter-spacing: 0.01em;
   text-transform: uppercase;
   color: var(--vt-lit);
-  text-shadow: 0 2px 14px rgba(7, 11, 22, 0.75), var(--vt-glow);
+  text-shadow: 0 2px 14px rgba(var(--vt-bg-rgb), 0.75), var(--vt-glow);
 }
 
 .vt-home-hero i {
@@ -719,13 +725,13 @@ h2 {
   height: 60px !important;
   font-size: 18px !important;
   padding-inline-start: 56px;
-  background: rgba(11, 16, 32, 0.78) !important;
-  box-shadow: inset 0 0 0 1px rgba(147, 197, 253, 0.45), 0 0 34px rgba(59, 111, 212, 0.35) !important;
+  background: rgba(var(--vt-main-rgb), 0.78) !important;
+  box-shadow: inset 0 0 0 1px rgba(var(--vt-accent-rgb), 0.45), 0 0 34px rgba(var(--vt-primary-rgb), 0.35) !important;
 }
 
 .vt-home-search #global-nav-bar input:focus {
-  background: rgba(11, 16, 32, 0.96) !important;
-  box-shadow: inset 0 0 0 1px var(--vt-lit), 0 0 26px rgba(147, 197, 253, 0.55), 0 0 64px rgba(59, 111, 212, 0.5) !important;
+  background: rgba(var(--vt-main-rgb), 0.96) !important;
+  box-shadow: inset 0 0 0 1px var(--vt-lit), 0 0 26px rgba(var(--vt-accent-rgb), 0.55), 0 0 64px rgba(var(--vt-primary-rgb), 0.5) !important;
 }
 
 .vt-home-search #global-nav-bar form[role="search"]::after {
@@ -791,7 +797,7 @@ h2 {
 /* Filtros */
 [data-encore-id="chip"] > span {
   background-color: transparent;
-  box-shadow: inset 0 0 0 1px rgba(147, 197, 253, 0.28);
+  box-shadow: inset 0 0 0 1px rgba(var(--vt-accent-rgb), 0.28);
   color: var(--vt-accent);
 }
 
@@ -810,22 +816,22 @@ h2 {
 #Desktop_LeftSidebar_Id [data-encore-id="buttonPrimary"] > span {
   background-color: var(--vt-lit) !important;
   color: var(--vt-ink) !important;
-  box-shadow: 0 0 18px rgba(147, 197, 253, 0.35);
+  box-shadow: 0 0 18px rgba(var(--vt-accent-rgb), 0.35);
   transition: box-shadow 0.15s ease;
 }
 
 #main-view [data-encore-id="buttonPrimary"]:hover > span,
 #Desktop_LeftSidebar_Id [data-encore-id="buttonPrimary"]:hover > span {
-  box-shadow: 0 0 26px rgba(147, 197, 253, 0.7);
+  box-shadow: 0 0 26px rgba(var(--vt-accent-rgb), 0.7);
 }
 
 /* Reproductor flotante */
 [data-testid="now-playing-bar"] {
   /* Sólida: flota sobre el contenido y no debe transparentar los títulos de detrás */
-  background: #0b1020 !important;
+  background: var(--vt-main) !important;
   border: 0 !important;
   border-radius: 22px !important;
-  box-shadow: inset 0 0 0 1px rgba(147, 197, 253, 0.18), 0 14px 44px -8px rgba(0, 0, 0, 0.85);
+  box-shadow: inset 0 0 0 1px rgba(var(--vt-accent-rgb), 0.18), 0 14px 44px -8px rgba(0, 0, 0, 0.85);
 }
 
 /* Píldora centrada: su ancho lo marca lo que lleva dentro, así que cada botón nuevo la agranda */
@@ -1007,7 +1013,7 @@ h2 {
 }
 
 .x-progressBar-progressBarBg {
-  background-color: rgba(147, 197, 253, 0.16) !important;
+  background-color: rgba(var(--vt-accent-rgb), 0.16) !important;
   border-radius: 5px;
 }
 
@@ -1016,7 +1022,7 @@ h2 {
 }
 
 [data-testid="playback-progressbar"] .x-progressBar-fillColor {
-  background: linear-gradient(90deg, #3b6fd4 0%, #93c5fd 90%, #e6f0ff 100%) !important;
+  background: linear-gradient(90deg, var(--vt-primary) 0%, var(--vt-accent) 90%, var(--vt-lit) 100%) !important;
 }
 
 [data-testid="playback-position"],
@@ -1032,7 +1038,7 @@ h2 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(147, 197, 253, 0.25);
+  background: rgba(var(--vt-accent-rgb), 0.25);
   border-radius: 8px;
 }
 
@@ -1064,8 +1070,8 @@ h2 {
 }
 
 #expanded-panel-portal > * {
-  --background-base: #0b1020 !important;
-  background: #0b1020 !important;
+  --background-base: var(--vt-main) !important;
+  background: var(--vt-main) !important;
   border-radius: var(--vt-panel-radius);
   box-shadow: var(--vt-edge);
 }
@@ -1082,7 +1088,7 @@ body #SpicyLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line .lette
 /* El brillo del karaoke pasa a azul. Sin un halo fijo en toda la línea: al repintarse en cada cuadro baja a 37 fps */
 body #SpicyLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line.Active .word,
 body #SpicyLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line.Active .letter {
-  text-shadow: 0 0 var(--text-shadow-blur-radius) rgba(147, 197, 253, var(--text-shadow-opacity)) !important;
+  text-shadow: 0 0 var(--text-shadow-blur-radius) rgba(var(--vt-accent-rgb), var(--text-shadow-opacity)) !important;
 }
 
 /* Las letras van sobre el fondo del tema, no sobre los colores de Spicy Lyrics y Mix Lyrics */
