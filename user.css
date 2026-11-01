@@ -1108,6 +1108,23 @@ body .encore-over-media-set {
   --text-subdued: var(--spice-subtext) !important;
 }
 
+/* Textos con color fijo de Spotify y Spicy Lyrics: siguen a la paleta */
+.AzyibAhHsGbHLZZ7F51C .encore-internal-color-text-subdued,
+.G4Bdhdhr1iwtto7VqSYS {
+  color: var(--spice-subtext) !important;
+}
+
+.CardTitle {
+  color: rgba(var(--spice-rgb-text, 255, 255, 255), 0.92) !important;
+}
+
+/* El botón Mix activo tiene un fondo oscuro en todas las paletas: su texto siempre es claro */
+.mcHtqVaH2QNUgU8BnAaK button,
+.mcHtqVaH2QNUgU8BnAaK button * {
+  color: #fff !important;
+  fill: #fff !important;
+}
+
 /* Las letras van sobre el fondo del tema, no sobre los colores de Spicy Lyrics y Mix Lyrics */
 #SpicyLyricsPage .CanvasAmbient,
 .spicy-dynamic-bg,

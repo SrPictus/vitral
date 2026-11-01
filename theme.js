@@ -217,6 +217,7 @@
       const url = current;
       current = null;
       showCover(url);
+      syncHero();
     }).observe(scheme, { childList: true, characterData: true, subtree: true });
   }
 
@@ -251,7 +252,10 @@
     const fill = heroFill.getContext("2d");
     fill.globalCompositeOperation = "source-over";
     fill.clearRect(0, 0, 64, 64);
-    fill.filter = "blur(4px) brightness(0.5) saturate(1.15)";
+    // En la paleta clara la foto no se oscurece: sobre fondo claro quedaría como una mancha
+    const main = getComputedStyle(root).getPropertyValue("--vt-main").trim();
+    const isLight = parseInt(main.slice(1, 3), 16) > 128;
+    fill.filter = `blur(4px) brightness(${isLight ? 1 : 0.5}) saturate(1.15)`;
     fill.drawImage(img, -8, -8, 80, 80);
     fill.filter = "none";
     fill.globalCompositeOperation = "destination-in";
