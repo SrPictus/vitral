@@ -1069,3 +1069,25 @@ h2 {
   border-radius: var(--vt-panel-radius);
   box-shadow: var(--vt-edge);
 }
+
+/* Spicy Lyrics y Mix Lyrics con la letra del tema, también si la persona activó la fuente de Spicy Lyrics.
+   Anton solo tiene latín: los demás alfabetos siguen con sus fuentes */
+body #SpicyLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line,
+body #SpicyLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line .word,
+body #SpicyLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line .letter {
+  font-family: "Anton", "Onest", "SpicyLyrics", "Noto Sans Georgian", "VazirmatnRegular", sans-serif !important;
+  font-weight: 400 !important;
+}
+
+/* El brillo del karaoke pasa a azul. Sin un halo fijo en toda la línea: al repintarse en cada cuadro baja a 37 fps */
+body #SpicyLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line.Active .word,
+body #SpicyLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line.Active .letter {
+  text-shadow: 0 0 var(--text-shadow-blur-radius) rgba(147, 197, 253, var(--text-shadow-opacity)) !important;
+}
+
+/* Las letras van sobre el fondo del tema, no sobre los colores de Spicy Lyrics y Mix Lyrics */
+#SpicyLyricsPage .CanvasAmbient,
+.spicy-dynamic-bg,
+.ml-backdrop {
+  display: none !important;
+}
