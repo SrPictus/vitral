@@ -1,6 +1,6 @@
 # Vitral
 
-A Spicetify theme for Spotify desktop in eight colors: Dark Blue, Pink, Purple, Red, Cyan, Lime, Black and White. The album art lights the window from behind glass, and the home page is rebuilt around a large greeting and search bar.
+A Spicetify theme for Spotify desktop in eight colors: Dark Blue, Pink, Purple, Red, Cyan, Lime, Black and White. The background stays in the color you pick, and the home page is rebuilt around a large greeting and search bar.
 
 *[Versión en español más abajo](#español)*
 
@@ -80,7 +80,7 @@ MIT. See [LICENSE](LICENSE).
 
 ## Español
 
-Tema de Spicetify para Spotify de escritorio en ocho colores: Dark Blue, Pink, Purple, Red, Cyan, Lime, Black y White; se elige en el desplegable de Marketplace. La carátula ilumina la ventana desde detrás del vidrio, y el inicio se rehace alrededor de un saludo grande y el buscador.
+Tema de Spicetify para Spotify de escritorio en ocho colores: Dark Blue, Pink, Purple, Red, Cyan, Lime, Black y White; se elige en el desplegable de Marketplace. El fondo se mantiene en el color que elijas, y el inicio se rehace alrededor de un saludo grande y el buscador.
 
 **Incluye:** inicio con saludo en tu idioma, mosaico de recientes, foto grande que se desvanece en playlists, álbumes y artistas, reproductor en píldora flotante, lista lateral compacta y ojos en el botón de play que siguen al cursor.
 

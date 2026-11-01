@@ -11,15 +11,9 @@
   fonts.onload = () => (fonts.media = "all");
   document.head.append(fonts);
 
-  // Capas del fondo. La luz aparece desde el primer instante, sin esperar al reproductor
+  // Capas del fondo: siempre el color de la paleta, sin cambiar con la canción
   const backdrop = document.createElement("div");
   backdrop.id = "vitral-backdrop";
-  const layers = [document.createElement("canvas"), document.createElement("canvas")];
-  layers.forEach((canvas) => {
-    canvas.width = canvas.height = 96;
-    canvas.className = "vt-cover";
-    backdrop.append(canvas);
-  });
   ["vt-aurora vt-aurora-a", "vt-scanlines"].forEach((name) => {
     const layer = document.createElement("div");
     layer.className = name;
@@ -154,62 +148,6 @@
     };
   })();
 
-  // Pinta la carátula ya desenfocada y teñida en un lienzo mínimo. Se calcula una vez por
-  // canción y la tarjeta gráfica solo la estira: nada de desenfoque en vivo
-  function paint(canvas, img) {
-    const ctx = canvas.getContext("2d", { willReadFrequently: true });
-    ctx.globalCompositeOperation = "source-over";
-    ctx.filter = "none";
-    ctx.drawImage(img, 0, 0, 96, 96);
-    const { data } = ctx.getImageData(0, 0, 96, 96);
-
-    let light = 0;
-    for (let i = 0; i < data.length; i += 16) {
-      light += (0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2]) / 255;
-    }
-
-    // Exposición pareja: las carátulas blancas no deslumbran y las negras no desaparecen
-    const exposure = Math.min(Math.max(0.2 / Math.max(light / (data.length / 16), 0.05), 0.3), 1.8);
-    ctx.filter = `blur(9px) grayscale(1) contrast(1.25) brightness(${exposure.toFixed(2)})`;
-    ctx.drawImage(img, -14, -14, 124, 124);
-    ctx.filter = "none";
-
-    ctx.globalCompositeOperation = "color";
-    const tint = ctx.createLinearGradient(0, 0, 96, 96);
-    const palette = getComputedStyle(root);
-    tint.addColorStop(0, palette.getPropertyValue("--vt-surface").trim() || "#1e2a4a");
-    tint.addColorStop(1, palette.getPropertyValue("--vt-primary").trim() || "#3b6fd4");
-    ctx.fillStyle = tint;
-    ctx.fillRect(0, 0, 96, 96);
-  }
-
-  let front = 0;
-  let current = null;
-
-  async function showCover(url) {
-    if (!url || url === current) return;
-    current = url;
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.src = url;
-    try {
-      await img.decode();
-    } catch {
-      return;
-    }
-    if (url !== current) return;
-
-    const next = layers[1 - front];
-    try {
-      paint(next, img);
-    } catch {
-      return; // Imagen sin permiso de lectura: se queda la luz anterior
-    }
-    next.classList.add("is-visible");
-    layers[front].classList.remove("is-visible");
-    front = 1 - front;
-  }
-
   // Las paletas claras usan menos sombra: el fondo, las fotos y el brillo se suavizan desde el CSS
   const syncLightPalette = () => {
     const main = getComputedStyle(root).getPropertyValue("--vt-main").trim();
@@ -217,17 +155,6 @@
   };
   syncLightPalette();
   setInterval(syncLightPalette, 2000);
-
-  // Al elegir otra paleta en Marketplace, la luz de fondo se vuelve a teñir con sus colores
-  const scheme = document.querySelector("style.marketplaceScheme");
-  if (scheme) {
-    new MutationObserver(() => {
-      const url = current;
-      current = null;
-      showCover(url);
-      syncHero();
-    }).observe(scheme, { childList: true, characterData: true, subtree: true });
-  }
 
   function imageUrl(image) {
     return image?.startsWith("spotify:image:") ? `https://i.scdn.co/image/${image.split(":").pop()}` : image;
@@ -243,12 +170,9 @@
   hero.className = "vt-hero";
   const heroGhost = document.createElement("span");
   heroGhost.className = "vt-hero-ghost";
-  const heroFill = document.createElement("canvas");
-  heroFill.className = "vt-hero-fill";
-  heroFill.width = heroFill.height = 64;
   const heroImg = document.createElement("canvas");
   heroImg.className = "vt-hero-img";
-  hero.append(heroFill, heroGhost, heroImg);
+  hero.append(heroGhost, heroImg);
   for (let i = 0; i < 4; i++) hero.append(document.createElement("i"));
 
   let heroSource = null;
@@ -257,22 +181,6 @@
   // Foto, desenfoque y desvanecido quedan pintados una vez por página en una imagen fija:
   // al hacer scroll el navegador solo la mueve, sin filtros ni máscaras en vivo
   function paintHero(img, wide) {
-    const fill = heroFill.getContext("2d");
-    fill.globalCompositeOperation = "source-over";
-    fill.clearRect(0, 0, 64, 64);
-    // En la paleta clara la foto no se oscurece: sobre fondo claro quedaría como una mancha
-    const main = getComputedStyle(root).getPropertyValue("--vt-main").trim();
-    const isLight = parseInt(main.slice(1, 3), 16) > 128;
-    fill.filter = `blur(4px) brightness(${isLight ? 1 : 0.5}) saturate(1.15)`;
-    fill.drawImage(img, -8, -8, 80, 80);
-    fill.filter = "none";
-    fill.globalCompositeOperation = "destination-in";
-    const fillFade = fill.createLinearGradient(0, 0, 0, 64);
-    fillFade.addColorStop(0.25, "#000");
-    fillFade.addColorStop(0.92, "transparent");
-    fill.fillStyle = fillFade;
-    fill.fillRect(0, 0, 64, 64);
-
     const side = Math.min(img.naturalWidth, img.naturalHeight);
     const width = wide ? img.naturalWidth : side;
     const height = wide ? img.naturalHeight : side;
@@ -597,15 +505,9 @@
       root.classList.add("vt-has-face");
       setTimeout(face.startBlinking, 600);
     }
-    const syncCover = () => {
-      const metadata = Spicetify.Player.data?.item?.metadata;
-      showCover(imageUrl(metadata?.image_small_url ?? metadata?.image_url));
-    };
-
     Spicetify.Player.addEventListener("onplaypause", syncPlaying);
     Spicetify.Player.addEventListener("songchange", () => {
       syncPlaying();
-      syncCover();
       if (homeHero.isConnected) paintHomeCover();
       animate(".main-nowPlayingBar-left", [
         { opacity: 0, transform: "translateY(8px)" },
@@ -665,7 +567,6 @@
     });
 
     syncPlaying();
-    syncCover();
     syncHero();
   })();
 })();

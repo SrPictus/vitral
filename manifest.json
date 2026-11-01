@@ -1,7 +1,7 @@
 [
   {
     "name": "Vitral",
-    "description": "Theme in eight colors (Dark Blue, Pink, Purple, Red, Cyan, Lime, Black, White) where album art lights the window from behind glass, with a rebuilt home page and a floating pill player. Works on its own, with optional integrations for Spicy Lyrics, Mix Lyrics and No Controls.",
+    "description": "Theme in eight colors (Dark Blue, Pink, Purple, Red, Cyan, Lime, Black, White) with a rebuilt home page and a floating pill player. Works on its own, with optional integrations for Spicy Lyrics, Mix Lyrics and No Controls.",
     "preview": "preview.png",
     "readme": "README.md",
     "usercss": "user.css",

@@ -51,23 +51,6 @@ html {
   contain: strict;
 }
 
-.vt-cover {
-  position: absolute;
-  inset: -10%;
-  width: 120%;
-  height: 120%;
-  opacity: 0;
-  /* La capa que no se ve deja de contar para la tarjeta gráfica al terminar el fundido */
-  visibility: hidden;
-  transition: opacity 1.2s ease, visibility 0s linear 1.2s;
-}
-
-.vt-cover.is-visible {
-  opacity: 0.6;
-  visibility: visible;
-  transition: opacity 1.2s ease;
-}
-
 /* Se pinta a la mitad de tamaño y se amplía: al ser un degradado difuso se ve igual y ocupa un cuarto */
 .vt-aurora {
   position: absolute;
@@ -405,7 +388,6 @@ h2 {
   display: none !important;
 }
 
-.vt-hero-wide .vt-hero-fill,
 .vt-hero-wide .vt-hero-ghost {
   display: none;
 }
@@ -447,14 +429,6 @@ h2 {
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
-}
-
-/* Detrás, la misma foto difuminada a propósito para llenar el ancho */
-.vt-hero-fill {
-  position: absolute;
-  inset: -60px;
-  width: calc(100% + 120px);
-  height: calc(100% + 120px);
 }
 
 /* Delante, la foto nítida a su tamaño real, sin estirarla: se desvanece como el avatar del portafolio */
@@ -1053,7 +1027,6 @@ h2 {
     animation: none;
   }
 
-  .vt-cover,
   #Desktop_LeftSidebar_Id .xyKGFDsvgoKiCZaisfQ1,
   .vt-face,
   .vt-face > span,
@@ -1128,14 +1101,6 @@ body .encore-over-media-set {
 /* Paletas claras: sin sombras que ensucien el fondo, las fotos ni los títulos */
 :root.vt-light {
   --vt-glow: 0 0 18px rgba(var(--vt-primary-rgb), 0.28);
-}
-
-.vt-light .vt-cover.is-visible {
-  opacity: 0.16;
-}
-
-.vt-light .vt-hero-fill {
-  opacity: 0.3;
 }
 
 .vt-light .main-entityHeader-headerText .encore-internal-color-text-subdued,
