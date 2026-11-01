@@ -210,6 +210,14 @@
     front = 1 - front;
   }
 
+  // Las paletas claras usan menos sombra: el fondo, las fotos y el brillo se suavizan desde el CSS
+  const syncLightPalette = () => {
+    const main = getComputedStyle(root).getPropertyValue("--vt-main").trim();
+    root.classList.toggle("vt-light", parseInt(main.slice(1, 3), 16) > 128);
+  };
+  syncLightPalette();
+  setInterval(syncLightPalette, 2000);
+
   // Al elegir otra paleta en Marketplace, la luz de fondo se vuelve a teñir con sus colores
   const scheme = document.querySelector("style.marketplaceScheme");
   if (scheme) {

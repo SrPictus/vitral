@@ -1125,6 +1125,34 @@ body .encore-over-media-set {
   fill: #fff !important;
 }
 
+/* Paletas claras: sin sombras que ensucien el fondo, las fotos ni los títulos */
+:root.vt-light {
+  --vt-glow: 0 0 18px rgba(var(--vt-primary-rgb), 0.28);
+}
+
+.vt-light .vt-cover.is-visible {
+  opacity: 0.16;
+}
+
+.vt-light .vt-hero-fill {
+  opacity: 0.3;
+}
+
+.vt-light .main-entityHeader-headerText .encore-internal-color-text-subdued,
+.vt-light aside .encore-internal-color-text-subdued {
+  color: var(--spice-subtext) !important;
+}
+
+/* Las sílabas enfatizadas llevan su propia sombra blanca, que las borra sobre fondo claro */
+.vt-light #SpicyLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line.NotSung,
+.vt-light #SpicyLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line.Sung,
+.vt-light #SpicyLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line.NotSung .letterGroup,
+.vt-light #SpicyLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line.Sung .letterGroup,
+.vt-light #SpicyLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line.NotSung .letter,
+.vt-light #SpicyLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line.Sung .letter {
+  text-shadow: 0 0 var(--BlurAmount, 0) rgba(var(--spice-rgb-text), 0.35) !important;
+}
+
 /* Las letras van sobre el fondo del tema, no sobre los colores de Spicy Lyrics y Mix Lyrics */
 #SpicyLyricsPage .CanvasAmbient,
 .spicy-dynamic-bg,
