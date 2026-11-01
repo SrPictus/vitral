@@ -1,7 +1,7 @@
 [
   {
     "name": "Vitral",
-    "description": "Deep-blue theme where album art lights the window from behind glass, with a rebuilt home page and a floating pill player. Compatible with Spicy Lyrics and No Controls.",
+    "description": "Deep-blue theme where album art lights the window from behind glass, with a rebuilt home page and a floating pill player. Works on its own, with optional integrations for Spicy Lyrics, Mix Lyrics and No Controls.",
     "preview": "preview.png",
     "readme": "README.md",
     "usercss": "user.css",

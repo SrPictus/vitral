@@ -25,12 +25,13 @@ The play button watches your cursor:
 - **Play button eyes** that follow your cursor and blink while music plays
 - Works in any Spotify language, with fallback fonts for non-Latin scripts
 
-## Compatible extensions
+## Optional integrations
 
-Developed and tested alongside these two extensions:
+Vitral works on its own and needs no extensions. If you use any of these, it adapts to them:
 
-- **[Spicy Lyrics](https://github.com/Spikerko/spicy-lyrics)** by Spikerko
-- **No Controls** by ohitstom (if you bring the window buttons back with F8, they overlap the profile picture)
+- **[Spicy Lyrics](https://github.com/Spikerko/spicy-lyrics)** by Spikerko: lyrics take the theme's font, background and blue karaoke glow
+- **[Mix Lyrics](https://github.com/SrPictus/mix-lyrics)**: both songs' lyrics during a mix get the same look
+- **No Controls** by ohitstom: if you bring the window buttons back with F8, they overlap the profile picture
 
 ## Requirements
 
@@ -71,7 +72,7 @@ Tema de Spicetify en azul profundo para Spotify de escritorio. La carátula ilum
 
 **Incluye:** inicio con saludo en tu idioma, mosaico de recientes, foto grande que se desvanece en playlists, álbumes y artistas, reproductor en píldora flotante, lista lateral compacta y ojos en el botón de play que siguen al cursor.
 
-**Compatible con:** Spicy Lyrics y No Controls. Si recuperas los botones de ventana con F8 en No Controls, se montan sobre la foto de perfil.
+**Integraciones opcionales:** Vitral funciona solo y no necesita ninguna extensión. Si usas Spicy Lyrics o Mix Lyrics, las letras toman la fuente, el fondo y el brillo azul del tema. También es compatible con No Controls: si recuperas los botones de ventana con F8, se montan sobre la foto de perfil.
 
 **Instalación:** copia esta carpeta en `%APPDATA%\spicetify\Themes\Vitral` (Windows) o `~/.config/spicetify/Themes/Vitral` (macOS y Linux), y ejecuta los comandos de arriba.
 
