@@ -374,7 +374,7 @@ h2 {
 
 #main-view [data-testid="adaptiveEntityTitle"] span {
   font-family: "Anton", "SpotifyMixUITitle", sans-serif !important;
-  font-size: clamp(34px, 3.4vw, 58px) !important;
+  font-size: clamp(34px, 5cqw, 130px) !important;
   font-weight: 400 !important;
   letter-spacing: 0.01em !important;
   line-height: 1.04 !important;
@@ -497,7 +497,7 @@ h2 {
 /* El título se queda en la mitad izquierda para no tapar la portada */
 .vt-has-hero #main-view .main-entityHeader-title h1 {
   max-width: 50% !important;
-  font-size: clamp(34px, 3.4vw, 58px) !important;
+  font-size: clamp(34px, 5cqw, 130px) !important;
   white-space: normal !important;
   color: var(--vt-lit);
   text-shadow: var(--vt-glow);
@@ -634,11 +634,12 @@ h2 {
 
 .vt-home-greeting {
   position: absolute;
-  top: 92px;
+  /* Su base no se mueve al crecer: así nunca se monta sobre el buscador */
+  top: calc(150px - 1.04em);
   left: 40px;
   right: 40px;
   white-space: nowrap;
-  font: 400 clamp(34px, 3.4vw, 58px) / 1.04 "Anton", "SpotifyMixUITitle", sans-serif;
+  font: 400 clamp(34px, 5cqw, 130px) / 1.04 "Anton", "SpotifyMixUITitle", sans-serif;
   letter-spacing: 0.01em;
   text-transform: uppercase;
   color: var(--vt-lit);
