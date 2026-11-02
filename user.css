@@ -416,6 +416,10 @@ h2 {
   aspect-ratio: auto;
 }
 
+.vt-hero-pending #main-view .main-view-container__scroll-node-child {
+  visibility: hidden;
+}
+
 .vt-has-hero #main-view .main-view-container__scroll-node-child {
   position: relative;
   isolation: isolate;

@@ -404,12 +404,35 @@
     return { raw: document.querySelector("#main-view img.main-entityHeader-image")?.getAttribute("src"), wide: false };
   }
 
+  // Mientras la foto carga, la página nueva espera oculta: así no asoma un momento el diseño de Spotify.
+  // Con un límite, para que una página sin foto o una conexión lenta nunca se quede en blanco
+  const HERO_WAIT_MS = 1200;
+  let heroPath = null;
+  let heroWaitTimer = 0;
+
+  function holdPage(path) {
+    if (path === heroPath) return;
+    heroPath = path;
+    root.classList.add("vt-hero-pending");
+    clearTimeout(heroWaitTimer);
+    heroWaitTimer = setTimeout(releasePage, HERO_WAIT_MS);
+  }
+
+  function releasePage() {
+    clearTimeout(heroWaitTimer);
+    root.classList.remove("vt-hero-pending");
+  }
+
   async function syncHero() {
     const token = ++heroToken;
-    if (!HERO_ROUTE.test(Spicetify.Platform.History.location.pathname)) {
+    const path = Spicetify.Platform.History.location.pathname;
+    if (!HERO_ROUTE.test(path)) {
+      heroPath = null;
+      releasePage();
       clearHero();
       return;
     }
+    holdPage(path);
     // Espera a que la página nueva tenga su imagen, sin confundirla con la anterior
     for (let tries = 0; tries < 40; tries++) {
       await new Promise((resolve) => setTimeout(resolve, tries ? 80 : 60));
@@ -438,6 +461,7 @@
       root.classList.add("vt-has-hero");
       // Dentro del contenido: sube exactamente con la página, sin código en cada cuadro
       content.prepend(hero);
+      releasePage();
       clearSeams();
       setTimeout(clearSeams, 500);
       if (!calm) {
@@ -446,6 +470,7 @@
       }
       return;
     }
+    releasePage();
     if (!heroSource) clearHero();
   }
 
