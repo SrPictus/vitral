@@ -404,73 +404,73 @@
     return { raw: document.querySelector("#main-view img.main-entityHeader-image")?.getAttribute("src"), wide: false };
   }
 
-  // Mientras la foto carga, la página nueva espera oculta: así no asoma un momento el diseño de Spotify.
-  // Con un límite, para que una página sin foto o una conexión lenta nunca se quede en blanco
-  const HERO_WAIT_MS = 1200;
-  let heroPath = null;
-  let heroWaitTimer = 0;
+  // Se busca la cabecera en cada cuadro: el diseño del tema entra en el mismo momento en que
+  // Spotify pinta la página, sin dejar ver su diseño ni ocultar nada mientras carga
+  const HERO_SEARCH_MS = 4000;
+  const nextFrame = () => new Promise((resolve) => requestAnimationFrame(resolve));
 
-  function holdPage(path) {
-    if (path === heroPath) return;
-    heroPath = path;
-    root.classList.add("vt-hero-pending");
-    clearTimeout(heroWaitTimer);
-    heroWaitTimer = setTimeout(releasePage, HERO_WAIT_MS);
-  }
-
-  function releasePage() {
-    clearTimeout(heroWaitTimer);
-    root.classList.remove("vt-hero-pending");
+  async function loadHeroImage(raw) {
+    for (const candidate of heroCandidates(raw)) {
+      const img = new Image();
+      img.src = candidate;
+      try {
+        await img.decode();
+        return img;
+      } catch {}
+    }
+    return null;
   }
 
   async function syncHero() {
     const token = ++heroToken;
     const path = Spicetify.Platform.History.location.pathname;
     if (!HERO_ROUTE.test(path)) {
-      heroPath = null;
-      releasePage();
       clearHero();
       return;
     }
-    holdPage(path);
     // Espera a que la página nueva tenga su imagen, sin confundirla con la anterior
-    for (let tries = 0; tries < 40; tries++) {
-      await new Promise((resolve) => setTimeout(resolve, tries ? 80 : 60));
+    const started = performance.now();
+    while (performance.now() - started < HERO_SEARCH_MS) {
+      await nextFrame();
       if (token !== heroToken) return;
       const { raw, wide } = heroSourceNow();
       const content = document.querySelector("#main-view .main-view-container__scroll-node-child");
       if (!raw || !content || (raw === heroSource && hero.parentElement === content)) continue;
 
-      let loaded = null;
-      for (const candidate of heroCandidates(raw)) {
-        const img = new Image();
-        img.src = candidate;
-        try {
-          await img.decode();
-          loaded = img;
-          break;
-        } catch {}
-      }
-      if (token !== heroToken) return;
-      if (!loaded) continue;
-
+      // El diseño del tema se pone en cuanto Spotify muestra la cabecera, sin esperar a la foto:
+      // así la página aparece ya con su forma final y la foto entra después con un fundido
       heroSource = raw;
-      paintHero(loaded, wide);
+      heroImg.width = heroImg.height = 0;
       heroGhost.textContent = document.querySelector("#main-view h1")?.textContent ?? "";
       hero.classList.toggle("vt-hero-wide", wide);
       root.classList.add("vt-has-hero");
       // Dentro del contenido: sube exactamente con la página, sin código en cada cuadro
       content.prepend(hero);
-      releasePage();
       clearSeams();
       setTimeout(clearSeams, 500);
+
+      // Primero la portada pequeña que Spotify ya pone en la página, que llega antes;
+      // la versión grande la sustituye en cuanto termina de descargar
+      const shown = wide ? null : document.querySelector("#main-view img.main-entityHeader-image");
+      const quick = !shown ? null : shown.complete && shown.naturalWidth ? Promise.resolve(shown) : new Promise((resolve) => {
+        shown.addEventListener("load", () => resolve(shown), { once: true });
+        shown.addEventListener("error", () => resolve(null), { once: true });
+      });
+      const sharper = loadHeroImage(raw);
+      let loaded = quick ? await Promise.race([quick, sharper]) : await sharper;
+      if (!loaded) loaded = await sharper;
+      if (token !== heroToken || !loaded) return;
+      paintHero(loaded, wide);
       if (!calm) {
-        heroImg.animate([{ transform: "scale(1.09)" }, { transform: "none" }], { duration: 1100, easing: "cubic-bezier(.22,1,.36,1)" });
-        hero.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 700, easing: "ease-out" });
+        heroImg.animate([{ opacity: 0, transform: "scale(1.09)" }, { opacity: 1, transform: "none" }], { duration: 900, easing: "cubic-bezier(.22,1,.36,1)" });
+      }
+      if (loaded === shown) {
+        sharper.then((big) => {
+          if (big && token === heroToken && big.naturalWidth > loaded.naturalWidth) paintHero(big, wide);
+        });
       }
       return;
     }
-    releasePage();
     if (!heroSource) clearHero();
   }
 
