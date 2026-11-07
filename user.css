@@ -114,6 +114,12 @@ body,
   background: transparent !important;
 }
 
+/* Las pastillas de tonalidad de las listas mezcladas escriben con el color de fondo de Spotify, que aquí es
+   transparente: sin esto, "4A" y compañía desaparecen. Van sobre colores claros, así que el texto es oscuro */
+[data-encore-id="tag"][style*="background-color"] {
+  color: #121212 !important;
+}
+
 /* Spotify tiñe artistas y álbumes con un color por página, puesto en línea sobre estas capas */
 #main-view [style*="--background-base"] {
   --background-base: transparent !important;
