@@ -270,11 +270,17 @@
       page.prepend(homeHero);
       placeHomeSearch();
     }
+    // Recientes era "/recents"; ahora Spotify lo da como la sección "Volver a escuchar"
+    let recents = false;
     document.querySelectorAll("#main-view .main-gridContainer-homepageContent > section").forEach((shelf) => {
       const href = shelf.querySelector("h2 a")?.getAttribute("href") ?? "";
-      shelf.classList.toggle("vt-shelf-recents", href.endsWith("/recents"));
+      const isRecents = !recents && (href.endsWith("/recents") || href.endsWith("/section/0JQ5DAIiKWzVFULQfUm85X"));
+      recents ||= isRecents;
+      shelf.classList.toggle("vt-shelf-recents", isRecents);
       shelf.classList.toggle("vt-shelf-lists", href.endsWith("/section/0JQ5DAnM3wGh0gz1MXnu4d"));
     });
+    // Sin ninguna sección de recientes se quedan los accesos de Spotify, para no perder lo tuyo
+    root.classList.toggle("vt-no-recents", !!page && !recents);
     if (homeHero.isConnected) homeGreeting.textContent = greetingText();
   }
 

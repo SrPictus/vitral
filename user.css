@@ -521,7 +521,7 @@ h2 {
 }
 
 /* Primero lo tuyo: recientes y listas bajo el buscador, sin el bloque de accesos */
-.vt-home #main-view .view-homeShortcutsGrid-shortcuts {
+.vt-home:not(.vt-no-recents) #main-view .view-homeShortcutsGrid-shortcuts {
   display: none !important;
 }
 
