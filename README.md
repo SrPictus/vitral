@@ -48,16 +48,47 @@ Vitral works on its own and needs no extensions. If you use any of these, it ada
 ## Requirements
 
 - [Spicetify](https://spicetify.app) 2.x with `inject_theme_js` enabled (the default)
-- Developed and tested on Windows with Spotify 1.3.6 and Spicetify 2.46
+- Developed and tested on Windows with Spotify 1.3.8 and Spicetify 2.46
 
 ## Install
 
-Copy this folder to `%APPDATA%\spicetify\Themes\Vitral` on Windows, or `~/.config/spicetify/Themes/Vitral` on macOS and Linux. Then run:
+### Marketplace (recommended)
+
+Open the **Marketplace** in Spotify, go to the **Themes** tab, search for **Vitral** and click **Install**. Pick a color in the dropdown at the top of the Marketplace. It updates on its own.
+
+### Manual, on Windows
+
+In PowerShell:
+
+```powershell
+$dir = "$env:APPDATA\spicetify\Themes\Vitral"; New-Item -ItemType Directory -Force $dir | Out-Null; foreach ($f in "user.css", "color.ini", "theme.js") { Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/SrPictus/vitral/main/$f" -OutFile "$dir\$f" }
+```
+
+```powershell
+spicetify config current_theme Vitral color_scheme "Dark Blue" inject_css 1 replace_colors 1 inject_theme_js 1
+```
+
+```powershell
+spicetify apply
+```
+
+### Manual, on macOS and Linux
+
+```bash
+mkdir -p ~/.config/spicetify/Themes/Vitral && for f in user.css color.ini theme.js; do curl -fsSL "https://raw.githubusercontent.com/SrPictus/vitral/main/$f" -o ~/.config/spicetify/Themes/Vitral/$f; done
+```
 
 ```bash
 spicetify config current_theme Vitral color_scheme "Dark Blue" inject_css 1 replace_colors 1 inject_theme_js 1
+```
+
+```bash
 spicetify apply
 ```
+
+To change the color by hand, replace `"Dark Blue"` with `Pink`, `Purple`, `Red`, `Cyan`, `Lime`, `Black` or `White` and run both commands again.
+
+If Spotify changes something Vitral depends on, the theme shows a one-time notice instead of leaving the page broken without explanation. Please [open an issue](https://github.com/SrPictus/vitral/issues) when you see it.
 
 ## Known limits
 
@@ -65,12 +96,19 @@ spicetify apply
 - Hover tooltips on the player buttons appear after a short pause on purpose, to keep the app responsive.
 - Tested in Spanish, English and Japanese. Right-to-left languages have not been tested.
 
-## Uninstall
+## Switch back
+
+From the Marketplace, click **Uninstall** on Vitral, or pick another theme. If you installed it by hand:
 
 ```bash
 spicetify config current_theme marketplace color_scheme " "
+```
+
+```bash
 spicetify apply
 ```
+
+Use `spicetify config current_theme " " color_scheme " "` instead of the first command if you don't use the Marketplace.
 
 ## License
 
@@ -86,6 +124,6 @@ Tema de Spicetify para Spotify de escritorio en ocho colores: Dark Blue, Pink, P
 
 **Integraciones opcionales:** Vitral funciona solo y no necesita ninguna extensión. Si usas Spicy Lyrics o Mix Lyrics, las letras toman la fuente, el fondo y el brillo azul del tema. También es compatible con No Controls: si recuperas los botones de ventana con F8, se montan sobre la foto de perfil.
 
-**Instalación:** copia esta carpeta en `%APPDATA%\spicetify\Themes\Vitral` (Windows) o `~/.config/spicetify/Themes/Vitral` (macOS y Linux), y ejecuta los comandos de arriba.
+**Instalación:** desde Marketplace, en la pestaña **Themes**, busca **Vitral** y pulsa **Install**; el color se elige en el desplegable de arriba. Para instalarlo a mano en Windows, macOS o Linux, usa los comandos de la sección *Install*. Para volver al tema anterior, mira *Switch back*.
 
 **Límites:** usa nombres internos de Spotify, así que una actualización puede romper partes del tema. Probado en Windows, en español, inglés y japonés; los idiomas de derecha a izquierda no están probados.

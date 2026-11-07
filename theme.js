@@ -597,6 +597,47 @@
       syncHero();
     });
 
+    // Spotify cambia su interfaz con las actualizaciones. Si una pieza que el tema necesita deja de
+    // aparecer, se avisa una sola vez por versión de Spotify, en lugar de dejar la página rota sin explicación
+    const HEALTH_KEY = "vitral:health-warned";
+    const spotifyVersion = Spicetify.Platform?.version ?? "";
+    let warned = {};
+    try {
+      warned = JSON.parse(localStorage.getItem(HEALTH_KEY) || "{}");
+    } catch {}
+    if (warned.version !== spotifyVersion) warned = { version: spotifyVersion };
+    const routeSince = { path: null, at: 0 };
+    const healthChecks = [
+      {
+        id: "home",
+        what: "the home page sections",
+        applies: () => isHomeRoute(),
+        healthy: () => !document.querySelector('#main-view [data-testid="home-page"]') || (homeHero.isConnected && !root.classList.contains("vt-no-recents")),
+      },
+      {
+        id: "header",
+        what: "the album and playlist header",
+        applies: () => /\/(album|playlist)\//.test(Spicetify.Platform.History.location.pathname),
+        healthy: () => !!document.querySelector('#main-view [data-testid="entity-header"], #main-view .main-entityHeader-container'),
+      },
+    ];
+    setInterval(() => {
+      if (document.hidden) return;
+      const path = Spicetify.Platform.History.location.pathname;
+      if (path !== routeSince.path) Object.assign(routeSince, { path, at: Date.now() });
+      // Se espera a que la página termine de cargar
+      if (Date.now() - routeSince.at < 6000) return;
+      for (const check of healthChecks) {
+        if (warned[check.id] || !check.applies() || check.healthy()) continue;
+        warned[check.id] = true;
+        try {
+          localStorage.setItem(HEALTH_KEY, JSON.stringify(warned));
+        } catch {}
+        console.warn(`[Vitral] Spotify ${spotifyVersion} changed ${check.what}; some styling may look off.`);
+        Spicetify.showNotification?.(`Vitral: Spotify changed ${check.what}. If something looks off, please report it on GitHub.`, false, 7000);
+      }
+    }, 3000);
+
     syncPlaying();
     syncHero();
   })();

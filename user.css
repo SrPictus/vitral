@@ -120,6 +120,13 @@ body,
   background: none !important;
 }
 
+/* En Canciones que te gustan y otras colecciones el tinte va en capas vacías con el color en línea.
+   Sin quitarlas, el color se corta en seco a la altura de la primera canción */
+#main-view [style*="background-color"]:empty,
+#main-view [style*="background-color"]:empty ~ :empty {
+  background: none !important;
+}
+
 [class*="mixingBackground"],
 [class*="actionBarBackground"],
 .kMaYBahSBLOnErF7DLR2,
