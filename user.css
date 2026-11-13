@@ -108,9 +108,9 @@ body,
 #Desktop_LeftSidebar_Id,
 #Desktop_LeftSidebar_Id nav > div,
 .YourLibraryX,
-.s8fIIxwITjOk1aFOxhPv,
+:is(.s8fIIxwITjOk1aFOxhPv, .Root__right-sidebar),
 .xyTYq7imng71iO6y2eGQ,
-.XvuTwlgQRqJ5NnVLN9ZH {
+:is(.XvuTwlgQRqJ5NnVLN9ZH, .Root__now-playing-bar) {
   background: transparent !important;
 }
 
@@ -207,15 +207,18 @@ html:not(.no-focus-outline) #Desktop_LeftSidebar_Id > nav:focus-within {
 }
 
 .YourLibraryX > div:first-child,
-.YourLibraryX .By4wE_aVhuYtLizakqDZ {
+.YourLibraryX :is(.By4wE_aVhuYtLizakqDZ, .main-yourLibraryX-filterArea),
+.YourLibraryX .main-yourLibraryX-rootListHeader {
   opacity: 0;
   transition: opacity 0.18s ease;
 }
 
 #Desktop_LeftSidebar_Id > nav:hover .YourLibraryX > div:first-child,
-#Desktop_LeftSidebar_Id > nav:hover .YourLibraryX .By4wE_aVhuYtLizakqDZ,
+#Desktop_LeftSidebar_Id > nav:hover .YourLibraryX :is(.By4wE_aVhuYtLizakqDZ, .main-yourLibraryX-filterArea),
 html:not(.no-focus-outline) #Desktop_LeftSidebar_Id > nav:focus-within .YourLibraryX > div:first-child,
-html:not(.no-focus-outline) #Desktop_LeftSidebar_Id > nav:focus-within .YourLibraryX .By4wE_aVhuYtLizakqDZ {
+html:not(.no-focus-outline) #Desktop_LeftSidebar_Id > nav:focus-within .YourLibraryX :is(.By4wE_aVhuYtLizakqDZ, .main-yourLibraryX-filterArea),
+#Desktop_LeftSidebar_Id > nav:hover .YourLibraryX .main-yourLibraryX-rootListHeader,
+html:not(.no-focus-outline) #Desktop_LeftSidebar_Id > nav:focus-within .YourLibraryX .main-yourLibraryX-rootListHeader {
   opacity: 1;
 }
 
@@ -226,14 +229,14 @@ html:not(.no-focus-outline) #Desktop_LeftSidebar_Id > nav:focus-within .YourLibr
 }
 
 /* Con el riel cerrado, las carátulas suben al hueco de la cabecera invisible; al abrir bajan */
-#Desktop_LeftSidebar_Id .xyKGFDsvgoKiCZaisfQ1 {
+#Desktop_LeftSidebar_Id :is(.xyKGFDsvgoKiCZaisfQ1, .main-yourLibraryX-libraryItemContainer) {
   margin-bottom: -85px;
   transform: translateY(-85px);
   transition: transform 0.18s var(--vt-ease) 0.09s;
 }
 
-#Desktop_LeftSidebar_Id > nav:hover .xyKGFDsvgoKiCZaisfQ1,
-html:not(.no-focus-outline) #Desktop_LeftSidebar_Id > nav:focus-within .xyKGFDsvgoKiCZaisfQ1 {
+#Desktop_LeftSidebar_Id > nav:hover :is(.xyKGFDsvgoKiCZaisfQ1, .main-yourLibraryX-libraryItemContainer),
+html:not(.no-focus-outline) #Desktop_LeftSidebar_Id > nav:focus-within :is(.xyKGFDsvgoKiCZaisfQ1, .main-yourLibraryX-libraryItemContainer) {
   transform: none;
 }
 
@@ -256,29 +259,29 @@ html:not(.no-focus-outline) #Desktop_LeftSidebar_Id > nav:focus-within .xyKGFDsv
 }
 
 /* Buscador: una cápsula con borde de luz que crece al usarla */
-.UmbvWivEpyn9EExmm6oQ {
+:is(.UmbvWivEpyn9EExmm6oQ, .main-globalNav-searchInputSection) {
   transform-origin: 0 0;
   width: 490px;
   transition: width 0.28s var(--vt-ease);
 }
 
 /* Se reserva su hueco en la barra: si no, Spotify cree que no cabe y lo encoge a un icono */
-.oxFroaXCJTMXfoZDaaf1 {
+:is(.oxFroaXCJTMXfoZDaaf1, .main-globalNav-searchContainer) {
   width: auto !important;
   min-width: 546px !important;
 }
 
-.searchInputCollapsed:not(.forceExpandSearchInput) .UmbvWivEpyn9EExmm6oQ > .omD8s8p6eZSUsYOOzg1S {
+.searchInputCollapsed:not(.forceExpandSearchInput) :is(.UmbvWivEpyn9EExmm6oQ, .main-globalNav-searchInputSection) > :is(.omD8s8p6eZSUsYOOzg1S, form) {
   width: 100% !important;
 }
 
-.searchInputCollapsed:not(.forceExpandSearchInput) .UmbvWivEpyn9EExmm6oQ > .omD8s8p6eZSUsYOOzg1S > :last-child {
+.searchInputCollapsed:not(.forceExpandSearchInput) :is(.UmbvWivEpyn9EExmm6oQ, .main-globalNav-searchInputSection) > :is(.omD8s8p6eZSUsYOOzg1S, form) > :last-child {
   opacity: 1 !important;
   visibility: visible !important;
 }
 
 
-.oxFroaXCJTMXfoZDaaf1:focus-within .UmbvWivEpyn9EExmm6oQ {
+:is(.oxFroaXCJTMXfoZDaaf1, .main-globalNav-searchContainer):focus-within :is(.UmbvWivEpyn9EExmm6oQ, .main-globalNav-searchInputSection) {
   width: 700px;
 }
 
@@ -547,10 +550,10 @@ h2 {
 }
 
 /* Recientes y Tus listas dejan de ser carruseles: sin flechas ni scroll lateral */
-.vt-home #main-view section.vt-shelf-recents .tPfod6L1Bt5VzxPtQjsx,
-.vt-home #main-view section.vt-shelf-lists .tPfod6L1Bt5VzxPtQjsx,
-.vt-home #main-view section.vt-shelf-recents .hsgbsNIodlFFDEyxiL7d,
-.vt-home #main-view section.vt-shelf-lists .hsgbsNIodlFFDEyxiL7d {
+.vt-home #main-view section.vt-shelf-recents :is(.tPfod6L1Bt5VzxPtQjsx, .search-searchCategory-contentArea),
+.vt-home #main-view section.vt-shelf-lists :is(.tPfod6L1Bt5VzxPtQjsx, .search-searchCategory-contentArea),
+.vt-home #main-view section.vt-shelf-recents :is(.hsgbsNIodlFFDEyxiL7d, .search-searchCategory-categoryGrid),
+.vt-home #main-view section.vt-shelf-lists :is(.hsgbsNIodlFFDEyxiL7d, .search-searchCategory-categoryGrid) {
   overflow: visible !important;
 }
 
@@ -559,8 +562,8 @@ h2 {
   width: 100% !important;
 }
 
-.vt-home #main-view section.vt-shelf-recents .X9dD8JF0R0KnCCmxoH9x,
-.vt-home #main-view section.vt-shelf-lists .X9dD8JF0R0KnCCmxoH9x {
+.vt-home #main-view section.vt-shelf-recents :is(.X9dD8JF0R0KnCCmxoH9x, .search-searchCategory-carousel),
+.vt-home #main-view section.vt-shelf-lists :is(.X9dD8JF0R0KnCCmxoH9x, .search-searchCategory-carousel) {
   display: none !important;
 }
 
@@ -681,7 +684,7 @@ h2 {
   scroll-timeline: --vt-home-scroll block;
 }
 
-.vt-home-search .UmbvWivEpyn9EExmm6oQ {
+.vt-home-search :is(.UmbvWivEpyn9EExmm6oQ, .main-globalNav-searchInputSection) {
   position: fixed !important;
   left: var(--vt-search-x);
   top: var(--vt-search-y);
@@ -700,7 +703,7 @@ h2 {
 }
 
 /* En el inicio ya estás en casa: la casita aparece cuando el buscador llega a su lado */
-.vt-home-search .oxFroaXCJTMXfoZDaaf1 > button {
+.vt-home-search :is(.oxFroaXCJTMXfoZDaaf1, .main-globalNav-searchContainer) > button {
   animation: vt-home-reveal linear both;
   animation-timeline: --vt-home-scroll;
   animation-range: 130px 230px;
@@ -729,7 +732,7 @@ h2 {
 }
 
 /* Inicio más limpio: sin filtros y con aire entre secciones */
-.vt-home #main-view .jTuahgNncRCCfJfiJwQi {
+.vt-home #main-view :is(.jTuahgNncRCCfJfiJwQi, .main-home-filterChipsContainer) {
   display: none !important;
 }
 
@@ -825,7 +828,7 @@ h2 {
 }
 
 /* Píldora centrada: su ancho lo marca lo que lleva dentro, así que cada botón nuevo la agranda */
-.XvuTwlgQRqJ5NnVLN9ZH {
+:is(.XvuTwlgQRqJ5NnVLN9ZH, .Root__now-playing-bar) {
   display: flex !important;
   justify-content: center;
 }
@@ -869,7 +872,7 @@ h2 {
 /* Los paneles bajan hasta el fondo de la ventana y la píldora flota encima de todo */
 #main-view,
 #Desktop_LeftSidebar_Id,
-.s8fIIxwITjOk1aFOxhPv {
+:is(.s8fIIxwITjOk1aFOxhPv, .Root__right-sidebar) {
   margin-bottom: -72px;
 }
 
@@ -877,13 +880,13 @@ h2 {
   padding-bottom: 88px;
 }
 
-.XvuTwlgQRqJ5NnVLN9ZH {
+:is(.XvuTwlgQRqJ5NnVLN9ZH, .Root__now-playing-bar) {
   position: relative;
   z-index: 40;
   pointer-events: none;
 }
 
-.XvuTwlgQRqJ5NnVLN9ZH > * {
+:is(.XvuTwlgQRqJ5NnVLN9ZH, .Root__now-playing-bar) > * {
   pointer-events: auto;
 }
 
@@ -1043,10 +1046,10 @@ h2 {
     animation: none;
   }
 
-  #Desktop_LeftSidebar_Id .xyKGFDsvgoKiCZaisfQ1,
+  #Desktop_LeftSidebar_Id :is(.xyKGFDsvgoKiCZaisfQ1, .main-yourLibraryX-libraryItemContainer),
   .vt-face,
   .vt-face > span,
-  .UmbvWivEpyn9EExmm6oQ,
+  :is(.UmbvWivEpyn9EExmm6oQ, .main-globalNav-searchInputSection),
   #Desktop_LeftSidebar_Id > nav,
   [data-encore-id="card"] img {
     transition: none;
@@ -1139,4 +1142,10 @@ body .encore-over-media-set {
 .spicy-dynamic-bg,
 .ml-backdrop {
   display: none !important;
+}
+
+/* Spotify 1.3.9 escribe el punto dentro del separador de la cabecera y Spicetify le añade otro delante:
+   si el separador ya trae su punto, sobra el añadido */
+.main-entityHeader-divider:not(:empty)::before {
+  content: none !important;
 }

@@ -300,7 +300,7 @@
     const startY = Math.round(box.top + scrolled + 170);
     const width = Math.round(Math.min(620, innerWidth * 0.52));
     // Destino: el hueco reservado en la barra superior, a la derecha de la casita
-    const slot = document.querySelector(".oxFroaXCJTMXfoZDaaf1")?.getBoundingClientRect();
+    const slot = document.querySelector(".oxFroaXCJTMXfoZDaaf1, .main-globalNav-searchContainer")?.getBoundingClientRect();
     const dockX = (slot?.left ?? 0) + 64;
     const dockY = (slot?.top ?? 8) + 0;
     root.style.setProperty("--vt-search-x", `${startX}px`);
@@ -314,7 +314,7 @@
   // Al entrar o salir del inicio el buscador vuela de un sitio al otro en vez de saltar:
   // se mide dónde estaba y dónde queda, y la tarjeta gráfica anima la diferencia
   function flySearch(change) {
-    const box = document.querySelector(".UmbvWivEpyn9EExmm6oQ");
+    const box = document.querySelector(".UmbvWivEpyn9EExmm6oQ, .main-globalNav-searchInputSection");
     if (calm || !box) {
       change();
       return;
@@ -329,7 +329,7 @@
       { translate: "0px 0px", scale: "1" },
     ], motion);
     const entering = root.classList.contains("vt-home-search");
-    document.querySelector(".oxFroaXCJTMXfoZDaaf1 > button")?.animate(
+    document.querySelector(":is(.oxFroaXCJTMXfoZDaaf1, .main-globalNav-searchContainer) > button")?.animate(
       [{ opacity: entering ? 1 : 0 }, { opacity: entering ? 0 : 1 }],
       motion,
     );
