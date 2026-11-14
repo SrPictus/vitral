@@ -48,19 +48,13 @@
     }, 450);
   }, true);
 
-  // Los ojos reciben adónde mirar unas 30 veces por segundo; el movimiento lo suaviza la transición
-  let pointerX = 0, pointerY = 0, pointerPending = false, pointerAt = 0;
+  // El ratón solo anota dónde está; los ojos lo persiguen cuadro a cuadro (ver face.follow)
+  let pointerX = 0, pointerY = 0;
   if (!calm) {
     window.addEventListener("pointermove", (event) => {
       pointerX = event.clientX;
       pointerY = event.clientY;
-      if (pointerPending || event.timeStamp - pointerAt < 33) return;
-      pointerPending = true;
-      requestAnimationFrame((now) => {
-        pointerPending = false;
-        pointerAt = now;
-        if (root.classList.contains("vt-playing")) face.look(pointerX, pointerY);
-      });
+      if (root.classList.contains("vt-playing")) face.follow();
     }, { passive: true });
   }
 
@@ -78,6 +72,8 @@
 
     let button = null;
     let x = 0, y = 0, wide = 0, idle = 0;
+    // Adónde quieren mirar, y si el bucle que los acerca está en marcha
+    let tx = 0, ty = 0, tw = 0, frame = 0, last = 0, resting = false;
     let centerX = 0, centerY = 0, measuredAt = -Infinity;
 
     function attach() {
@@ -122,29 +118,55 @@
       setTimeout(blink, 2400 + Math.random() * 4200);
     }
 
+    // Cada cuadro los ojos recorren una parte fija del camino que les falta, según el tiempo pasado.
+    // Así se mueven igual de suaves con el ratón rápido o lento, aunque algún cuadro llegue tarde
+    function follow() {
+      resting = false;
+      clearTimeout(idle);
+      // Si dejas de mover el ratón un rato, vuelve a mirar al frente
+      idle = setTimeout(() => {
+        resting = true;
+        wake();
+      }, 5000);
+      wake();
+    }
+
+    function wake() {
+      if (frame) return;
+      last = performance.now();
+      frame = requestAnimationFrame(step);
+    }
+
+    function step(now) {
+      frame = 0;
+      if (!attach()) return;
+      measure(now);
+      if (resting) {
+        tx = ty = tw = 0;
+      } else {
+        const dx = pointerX - centerX;
+        const dy = pointerY - centerY;
+        const distance = Math.hypot(dx, dy) || 1;
+        const reach = Math.min(distance / 150, 1);
+        tx = (dx / distance) * reach;
+        ty = (dy / distance) * reach;
+        tw = Math.max(0, 1 - distance / 240);
+      }
+      const dt = Math.min(64, now - last);
+      last = now;
+      const k = 1 - Math.exp(-dt / 55);
+      x += (tx - x) * k;
+      y += (ty - y) * k;
+      wide += (tw - wide) * k;
+      render();
+      // Cuando ya llegaron, el bucle se para hasta el siguiente movimiento
+      if (Math.abs(tx - x) + Math.abs(ty - y) + Math.abs(tw - wide) > 0.003) frame = requestAnimationFrame(step);
+    }
+
     return {
       attach,
       startBlinking: blink,
-      look(px, py) {
-        if (!attach()) return;
-        measure(performance.now());
-        const dx = px - centerX;
-        const dy = py - centerY;
-        const distance = Math.hypot(dx, dy) || 1;
-        const reach = Math.min(distance / 150, 1);
-        x = (dx / distance) * reach;
-        y = (dy / distance) * reach;
-        wide = Math.max(0, 1 - distance / 240);
-        // Solo se indica adónde mirar: la transición del CSS la anima la tarjeta gráfica,
-        // así los ojos siguen suaves aunque Spotify esté ocupado
-        render();
-        // Si dejas de mover el ratón un rato, vuelve a mirar al frente
-        clearTimeout(idle);
-        idle = setTimeout(() => {
-          x = y = wide = 0;
-          render();
-        }, 5000);
-      },
+      follow,
     };
   })();
 

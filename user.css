@@ -958,7 +958,8 @@ h2 {
   justify-content: center;
   gap: 6px;
   pointer-events: none;
-  transition: transform 0.16s cubic-bezier(0.22, 1, 0.36, 1);
+  /* Sin transición: el movimiento suave lo calcula el tema cuadro a cuadro */
+  will-change: transform;
 }
 
 .vt-has-face.vt-playing [data-testid="control-button-playpause"] .vt-face {
@@ -974,7 +975,7 @@ h2 {
   display: block;
   width: 6px;
   height: 15px;
-  transition: transform 0.16s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
 .vt-face b {
